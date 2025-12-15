@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import axios from 'axios';
+import api from '../config/axios';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ const Navbar = () => {
   
   const handleLogout = async () => {
     try {
-      await axios.post("api/auth/logout", {}, { withCredentials: true });
+      await api.post("/auth/logout", {});
       setAuth(null)
       navigate("/login")
     } catch (error) {

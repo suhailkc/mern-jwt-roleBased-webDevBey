@@ -1,6 +1,6 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import api from '../config/axios';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/auth/register', form, { withCredentials: true })
+      await api.post('/auth/register', form)
       navigate('/login')
     } catch (error) {
       setError("Registration failed. Please check your credentials");

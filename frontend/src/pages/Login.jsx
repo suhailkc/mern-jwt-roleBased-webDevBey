@@ -1,7 +1,7 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
+import api from '../config/axios';
 
 const Login = () => {
   const {setAuth} = useAuth();
@@ -16,7 +16,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/auth/login', form, { withCredentials: true })
+      const res = await api.post('/auth/login', form)
       setAuth({
         accessToken: res.data.accessToken,
         role: res.data.user?.role,
