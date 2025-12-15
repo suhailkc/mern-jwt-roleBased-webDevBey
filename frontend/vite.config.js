@@ -9,6 +9,8 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://mern-jwt-rolebased-webdevbey.onrender.com', // or http://localhost:5000
+        changeOrigin: true,
+        secure: false, // allow self-signed/invalid cert in dev
       },
     },
   },
