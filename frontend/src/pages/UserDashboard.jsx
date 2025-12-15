@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useEffect } from 'react';
-import axios from 'axios';
+import api from '../config/axios';
 
 const UserDashboard = () => {
 
@@ -13,7 +13,7 @@ const UserDashboard = () => {
     const fetchProfile = async () => {
       if (!auth?.accessToken) return
       try {
-        const res = await axios.get('/api/users/me', {
+        const res = await api.get('/users/me', {
           headers: {
             Authorization: `Bearer ${auth?.accessToken}`,
           },

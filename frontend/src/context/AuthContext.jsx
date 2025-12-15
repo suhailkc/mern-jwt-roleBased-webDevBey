@@ -11,7 +11,7 @@ export const AuthProvider = ({children}) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await api.get('/auth/refresh');
+        const res = await api.get('/auth/refresh', { withCredentials: true });
         setAuth({ 
           accessToken: res.data.accessToken, 
           role: res.data.user.role,

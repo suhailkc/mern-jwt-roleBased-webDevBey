@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../config/axios';
 
 const AdminDashboard = () => {
   const { auth, setAuth } = useAuth();
@@ -16,7 +17,7 @@ const AdminDashboard = () => {
     const fetchUsers = async () => {
       if (!auth.accessToken) return;
       try {
-        const res = await axios.get(`/api/users?page=${page}&limit=2`, {
+        const res = await api.get(`/users?page=${page}&limit=2`, {
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
           }, 
@@ -34,7 +35,7 @@ const AdminDashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/api/users/${id}`, {
+      await api.delete(`/users/${id}`, {
         headers: {
           Authorization: `Bearer ${auth.accessToken}`
         }, 
@@ -42,7 +43,7 @@ const AdminDashboard = () => {
       })
 
       // refetch users
-      const res = await axios.get(`/api/users?page=${page}&limit=2`, {
+      const res = await api.get(`/users?page=${page}&limit=2`, {
         headers: {
           Authorization: `Bearer ${auth.accessToken}`
         }, 
